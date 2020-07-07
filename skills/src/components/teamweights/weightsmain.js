@@ -19,33 +19,40 @@ class WeightsMain extends Component{
     }
   //
   render(){
-    return(
-      <main>
-        {this.state.allWeights.map((emp, i) =>
-          (
-            <div key={i}>
-              { this.state.allWeights.map((emp,j) =>
-                  (
-                    <div key={j}>
-                      {emp.empName}{
-                        emp.employeeWeights.map((weight,k)=>{
-                          return <div  key={k}>
-                              Date: {new  Date(weight.weighedDate).toLocaleDateString()}
-                              {' '}
-                              Weight: {weight.empWeight}
-                            </div>
-                        })
-                      }
-                    </div>
+    if(this.state.allWeights.length > 0){
+      return(
+        <main>
+          {this.state.allWeights.map((emp, i) =>
+            (
+              <div key={i}>
+                { this.state.allWeights.map((emp,j) =>
+                    (
+                      <div key={j}>
+                        {emp.empName}{
+                          emp.employeeWeights.map((weight,k)=>{
+                            return <div  key={k}>
+                                Date: {new  Date(weight.weighedDate).toLocaleDateString()}
+                                {' '}
+                                Weight: {weight.empWeight}
+                              </div>
+                          })
+                        }
+                      </div>
+                    )
                   )
-                )
-              }
-            </div>
-          )
-        )}
-      </main>
-    )
+                }
+              </div>
+            )
+          )}
+        </main>
+      )
+    } else {
+      return(
+        <div>Not authorized</div>
+      )
+    }
   }
+
 }
 //
 export default WeightsMain;

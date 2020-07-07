@@ -1,6 +1,7 @@
 const path = require('path');
 //const data = require('../Data/data.json');
 const controller = require('../controllers/controller');
+const auth = require('../controllers/auth');
 const bodyParser = require('body-parser');
 const express = require('express');
 const DIR_DIST = path.join(__dirname, '../dist');
@@ -25,5 +26,9 @@ module.exports = function(app) {
     //
     app.route('/addnewemployee').post(controller.addnewemployee);
     //
+    app.route('/getallrecords').get(auth, controller.getallrecords);
+    //
     app.route('/addnewweight').put(controller.addnewweight);
+    //
+    app.route('/loginuser').post(controller.loginuser);
 };
