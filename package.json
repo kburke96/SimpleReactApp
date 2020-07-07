@@ -19,6 +19,7 @@
     "mongoose": "^5.9.20",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "skills": "file:skills",
     "style-loader": "^1.2.1"
   },
   "devDependencies": {
