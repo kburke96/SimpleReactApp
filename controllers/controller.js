@@ -1,14 +1,14 @@
 const Employee = require('../models/employee');
 const schema = require('./validate');
 exports.getdefault = function(request, response){ 
-    response.send('You are on the root route.'); 
+    response.end('You are on the root route.'); 
 };
 //
 exports.getweights = function(request, response){
 	Employee.find({}, function(err,results){
 	  if (err)
-        response.end(err);
-      response.json(results);
+              response.end(err);
+      	  response.json(results);
 	});
   };
 
