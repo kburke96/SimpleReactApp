@@ -17,7 +17,8 @@ module.exports = function(app) {
     
     app.use(function(req, res, next) {
       res.header("Access-Control-Allow-Origin", "http://34.242.105.10:3000"); // update to match the domain you will make the request from
-      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      res.header("Access-Control-Allow-Credentials", "true");
+      res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization");
       res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
       next();
     });
@@ -25,7 +26,7 @@ module.exports = function(app) {
     //
     app.route('/').get(controller.getdefault);
       //
-    app.route('/getweights').get(controller.getweights);
+    app.route('/getweights').get(auth, controller.getweights);
     //
     app.route('/addnewemployee').post(controller.addnewemployee);
     //

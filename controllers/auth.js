@@ -6,6 +6,7 @@ module.exports = function (req, res, next) {
     req.userInfo = decToken;
     next();
   }catch(error){
+    console.log(error);
     return res.status(401).json({message:"not authorized"});
   }
 }

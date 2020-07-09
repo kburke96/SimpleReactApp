@@ -11,7 +11,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Route exact path="/" component={Home}/>
-        <Route path="/teamweights" component={TeamWeights}/>
+        <Route exact path="/teamweights" component={TeamWeights}/>
         <Route path="/login" component={Login}/>
         <Route path="/enterweight" component={EnterWeight} />
       </BrowserRouter>

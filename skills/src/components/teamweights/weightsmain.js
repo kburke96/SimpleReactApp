@@ -9,7 +9,14 @@ class WeightsMain extends Component{
   }
   //
   componentDidMount(){
-      fetch("http://34.242.105.10:3001/getweights")
+      console.log("DEBUG:: Sending the following URL: " )
+      fetch("http://34.242.105.10:3001/getweights", {
+        method:'GET',
+        headers:new Headers({
+          'Authorization': 'Bearer '+localStorage.getItem('token'),
+          'Content-Type': 'application/x-www-form-urlencoded'
+        })
+      })
       .then(response => response.json())
       .then(response => {
         this.setState({
