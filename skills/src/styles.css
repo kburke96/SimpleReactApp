@@ -49,6 +49,11 @@ ul{
 	margin:0;
 }
 
+nav li:last-of-type{
+	float: right;
+}
+  
+
 main{
 	float:left;
 	width:560px;

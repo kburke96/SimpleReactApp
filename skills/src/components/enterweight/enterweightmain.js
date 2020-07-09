@@ -1,6 +1,7 @@
 import React, {Component} from "react";
+const jwt = require('jsonwebtoken');
 //
-class LoginMain extends Component{
+class EnterWeightMain extends Component{
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -8,11 +9,24 @@ class LoginMain extends Component{
     this.state = {
       empName:"",
       empWeight:"",
-      empPass:"",
       loginStatus:"",
-      token:""
+      feedback:""
     }
   }
+  //
+  componentDidMount() {
+    const self = this;
+    const rawToken = localStorage.getItem('token');
+    jwt.verify(rawToken, 'mysecret', function(err, decoded) {
+      if (err) {
+        self.setState({feedback: 'Failed to authenticate token.'});
+      } else {
+        const decToken = jwt.verify(rawToken, 'mysecret');
+      }
+    });
+
+  }
+  //
   handleFieldChange(event) {
     this.setState({
       [event.target.name]:event.target.value
@@ -21,22 +35,20 @@ class LoginMain extends Component{
   handleSubmit(event) {
     const self = this;
     event.preventDefault();
-    fetch('http://34.242.105.10:3001/loginuser', {
-      method: 'POST',
+    fetch('http://34.242.105.10:3001/addnewweight', {
+      method: 'PUT',
       headers: { 
         'Accept': 'application/json',
         'Content-Type': 'application/json'
        },
       body: JSON.stringify({ 
         empName: this.state.empName,
-        empPass: this.state.empPass
+        empWeight: this.state.empWeight
        })
     }).then(function(response) {
       return response.json();
     }).then(function(data) {
-      self.setState({token: data.token});
-      self.setState({loginStatus: 'Logged in'});
-      localStorage.setItem('token', self.state.token)
+      self.setState({feedback: data.message});
     }).catch(function(err) {
       console.log(err);
     })
@@ -44,25 +56,27 @@ class LoginMain extends Component{
   render() {
     return (
       <main>
-        <h2>Login</h2>
+        <h2>Enter Weight</h2>
         <form onSubmit={this.handleSubmit}>
           <div>
-            <label>
-              Name:
-                <input type="text" name="empName" onChange={this.handleFieldChange} />
-            </label>
+            <span>
+              {this.state.empName}, what is your
+            </span>
           </div>
           <div>
             <label>
-              Password:
-                <input type="text" name="empPass" onChange={this.handleFieldChange} />
+              weight today:
+                <input type="text" name="empWeight" onChange={this.handleFieldChange} />
             </label>
           </div>
           <div>
             <input type="submit" value="Submit" />
           </div>
           <div>
-            <span>{this.state.empName} is {this.state.loginStatus}</span>
+            <span>{this.state.loginStatus}</span>
+          </div>
+          <div>
+            <span> {this.state.feedback} </span>
           </div>
         </form>
       </main>
@@ -70,4 +84,4 @@ class LoginMain extends Component{
   }
   
 };
-export default LoginMain
+export default EnterWeightMain

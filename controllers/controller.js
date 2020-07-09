@@ -4,26 +4,28 @@ const jwt = require('jsonwebtoken');
 //
 exports.loginuser = function(request, response){
 	let empName = request.body.empName;
-	  let empPass = request.body.empPass;
-	   Employee.find({empName:empName}, function(err, results) {
-		  if (err) response.end(err);
-	  if (empPass == results[0].empPass){
-		jwt.sign({
+	let empPass = request.body.empPass;
+	Employee.find({empName:empName}, function(err, results) {
+
+		if (err) response.end(err);
+	  	if (empPass == results[0].empPass){
+			jwt.sign({
 			empName:results[0].empName,
 			userID:results[0]._id
-		  },
-		  "mysecret",
-		  {expiresIn : "1h"},
-		  function(err, token){
-			if(err) throw err;
-			response.json({token:token});
-		  }
-		)
-	  } else {
-		response.send({status:"Login Failed"});
-	  }
+			},
+		  	"mysecret",
+		  	{expiresIn : "1h"},
+		  	function(err, token){
+				if(err) throw err;
+				response.json({token:token});
+		  	}
+			)
+	  	} else {
+			response.send({status:"Login Failed"});
+	  	}
 	});
   };
+  
   
 
 exports.getdefault = function(request, response){ 

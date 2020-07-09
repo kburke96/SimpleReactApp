@@ -3,6 +3,7 @@ import './styles.css';
 import Home from './components/home/home';
 import Login from './components/login/login';
 import TeamWeights from './components/teamweights/teamweights';
+import EnterWeight from './components/enterweight/enterweight';
 import {BrowserRouter, Route} from 'react-router-dom';
 //
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Route exact path="/" component={Home}/>
         <Route path="/teamweights" component={TeamWeights}/>
         <Route path="/login" component={Login}/>
+        <Route path="/enterweight" component={EnterWeight} />
       </BrowserRouter>
     </div>
   );

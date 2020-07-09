@@ -1,5 +1,6 @@
 import React from "react";
 import logo from '../../images/chart.gif';
+import { Link } from 'react-router-dom';
 //
 function Header(){
   return (
@@ -12,6 +13,7 @@ function Header(){
           <li><a href="enterweight">enter weight</a></li>
           <li><a href="myweights">my weight</a></li>
           <li><a href="teamweights">team weights</a></li>
+          <li><Link to="/login">login</Link></li>
         </ul>
       </nav>
     </header>
