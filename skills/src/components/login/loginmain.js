@@ -34,9 +34,16 @@ class LoginMain extends Component{
     }).then(function(response) {
       return response.json();
     }).then(function(data) {
-      self.setState({token: data.token});
-      self.setState({loginStatus: 'Logged in'});
-      localStorage.setItem('token', self.state.token)
+      if (typeof data.token === 'undefined') {
+        self.setState({loginStatus: "not logged in"});
+      } else if (typeof data.token === 'string') {
+        //console.log("DEBUG:: Data object: " + data);
+        console.log("DEBUG:: The token value is " + data.token);
+        console.log("DEBUG:: Type: " + typeof(data.token));
+        self.setState({token: data.token});
+        self.setState({loginStatus: 'Logged in'});
+        localStorage.setItem('token', self.state.token)
+      }
     }).catch(function(err) {
       console.log(err);
     })

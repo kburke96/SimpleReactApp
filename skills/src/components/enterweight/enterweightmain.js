@@ -21,7 +21,7 @@ class EnterWeightMain extends Component{
       if (err) {
         self.setState({feedback: 'Failed to authenticate token.'});
       } else {
-        const decToken = jwt.verify(rawToken, 'mysecret');
+        jwt.verify(rawToken, 'mysecret');
       }
     });
 
